@@ -33,20 +33,20 @@ Shadowbox.init();
 {% for movielink in movielinks %}
 <div class="well">
 
-    <p><span class="label {%if not movielink.parsed %}notice{%endif%}">{{movielink.title}}</span></p>
+    <p><div class="alert-message {%if not movielink.parsed %}error{%else%}success{%endif%}">{{movielink.title}}</div></p>
         {% if not movielink.parsed%}
         <form><input type="text" placeholder="演员名称" name="actress" value="{{movielink.actress_names}}" /><input type="submit" value="确认" class="btn" /> (多个名字用分号;隔开)</form>
         {%else%}
             演员名称：{{movielinks.actress_names}}
         {%endif%}
         <h4>剧照</h4>
-        {% for image in movielink.getImages %}
-            <ul class="media-grid">
+        <ul class="media-grid">
+            {% for image in movielink.getImages %}
                 <li>
-                    <a href="{{image}}" rel="shadowbox"><img class="thumbnail" src="{{ image }}" width="210" height="150" alt="图片较大，喝杯水吧。" /></a>
+                    <a href="{{image}}" rel="shadowbox[{{movielink.id}}]"><img class="thumbnail" src="{{ image }}" width="210" height="150" alt="图片较大，喝杯水吧。" /></a>
                 </li>
-            </ul>
-        {% endfor %}
+            {% endfor %}
+        </ul>
         <h4>下载链接</h4>
         {% for link in movielink.getLinks %}
             <p><a href="{{link}}" target="_blank">{{link}}</a></p>

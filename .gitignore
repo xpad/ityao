@@ -1,4 +1,10 @@
-*.log
-*.pot
+*~
+*.db
 *.pyc
-local_settings.py
+*.origin
+
+settings.py
+
+2011-08
+2011-10
+headers
