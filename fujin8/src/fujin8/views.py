@@ -10,15 +10,17 @@ from fujin8.btfactory.models import Actress
 from fujin8.btfactory.forms import ActressSearchForm
 
 def home(request):
+    actresses = []
     if request.method == 'POST':
         form = ActressSearchForm(request.POST)
         if form.is_valid():
-            actress = form.cleaned_data['actress']
-            actresses = Actress.objects.filter(co_names__icontains=actress)
-            return render_to_response(u'index.html',locals(), context_instance=RequestContext(request))
-        
-    actresses = Actress.objects.order_by('-id')[:8] 
-    form = ActressSearchForm()    
+            act_name = form.cleaned_data['actress']
+            actresses = Actress.objects.filter(co_names__icontains=act_name)
+       
+    # less database queries.
+    if not actresses:
+        actresses = Actress.objects.order_by('-id')[:8]
+    #form = ActressSearchForm()    
     return render_to_response(u'index.html',locals() , context_instance=RequestContext(request))
 
 def about(request): 

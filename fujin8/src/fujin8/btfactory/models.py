@@ -36,7 +36,7 @@ class Actress(models.Model):
     
     def __unicode__(self):
         return self.name
-        
+    
 class MovieLink(models.Model):
     daily_link = models.ForeignKey(DailyLink)
     title = models.CharField(max_length=255)
