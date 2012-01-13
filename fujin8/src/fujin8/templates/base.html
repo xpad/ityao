@@ -114,8 +114,6 @@
     <link rel="apple-touch-icon" href="/media/images/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/media/images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/media/images/apple-touch-icon-114x114.png">
-    {% block extra_js %}{% endblock %}
-    {% block extra_css %}{% endblock %}
   </head>
 
   <body>
@@ -171,7 +169,7 @@
 
     </div> <!-- /container -->
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
         
  var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-25815783-1']);
@@ -183,6 +181,8 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
+</script>-->
+    {% block extra_js %}{% endblock %}
+    {% block extra_css %}{% endblock %}
   </body>
 </html>

@@ -223,7 +223,7 @@ def moviethumbcron(request):
     
     return render_to_response('btfactory/movie.html', locals())
 
-def dailycron(request):
+def dailycron():
     # get daily link from the month link
     link = MonthlyLink.objects.get(enable=True)
     parseMonth(link)    
@@ -232,7 +232,11 @@ def dailycron(request):
     daily_lists = DailyLink.objects.filter(parsed=False).order_by('-id')
     for dl in daily_lists:
         parseDailyMovie(dl)
+    return daily_lists
     
+
+def dailycron_web(request):
+    daily_lists = dailycron()
     return render_to_response('btfactory/dailycron.html', locals())
 
 def parseActress(url):
@@ -294,8 +298,9 @@ def actresscron(request):
     return render_to_response('btfactory/actresscount.html', locals())
 
 def newfilm(request):
+    '''
     movielist = MovieLink.objects.order_by('-id')
-    paginator = Paginator(movielist, 10)
+    paginator = Paginator(movielist, 90)
     try:
         page = request.GET.get('page')
         if page is None:
@@ -309,6 +314,9 @@ def newfilm(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         result = paginator.page(paginator.num_pages)    
     return render_to_response(u'btfactory/newfilm.html',{'film_list':result}, context_instance=RequestContext(request))
+    '''
+    film_list = MovieLink.objects.order_by('-id')
+    return render_to_response('btfactory/newfilm.html', locals(),  context_instance=RequestContext(request))
      
 def daily(request):        
     parsed_daily_list = DailyLink.objects.order_by('-id')[:100]    

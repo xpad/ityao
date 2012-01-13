@@ -6,6 +6,7 @@ from datetime import date
 class MonthlyLink(models.Model):
     link = models.URLField(unique=True)
     enable = models.BooleanField(default=True)
+    raw_desc = models.TextField(blank=True)
         
     def __unicode__(self):
         return self.link
@@ -17,6 +18,7 @@ class DailyLink(models.Model):
     parsed = models.BooleanField(default=False)
     update_date = models.DateTimeField(auto_now=True)
     create_date = models.DateTimeField(auto_now_add=True)
+    raw_desc = models.TextField(blank=True)
     
     def __unicode__(self):
         return self.link
@@ -43,7 +45,7 @@ class MovieLink(models.Model):
     digestkey = models.CharField(max_length=255,unique=True)
     actress_names = models.CharField(max_length=255, blank=True)
     actress = models.ManyToManyField(Actress,blank=True)
-    raw_desc = models.TextField()
+    raw_desc = models.TextField(blank=True)
     images = models.TextField()
     images_loaded = models.BooleanField(default=False)
     downloadlink = models.TextField()
@@ -57,10 +59,11 @@ class MovieLink(models.Model):
     admin_thumbnail.allow_tags = True
     
     def getImages(self):
-        return str(self.images).split(";")
+        #return str(self.images).split(";")
+        return self.images.split(";")
     
     def getLinks(self):
-        return str(self.downloadlink).split(";")
+        return self.downloadlink.split(";")
         
     def __unicode__(self):
         return self.title

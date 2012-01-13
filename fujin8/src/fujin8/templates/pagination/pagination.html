@@ -1,0 +1,20 @@
+{% if is_paginated %}
+{% load i18n %}
+<div class="pagination">
+<ul>
+    <li class="pre {%if not page_obj.has_previous%}disabled{%endif%}">
+        <a href="{%if not page_obj.has_previous%}#{%else%}?page={{ page_obj.previous_page_number }}{{getvars}}{{hashtag}}{%endif%}">前一页</a>
+    </li>
+    {% for page in pages %}
+        {% if page %}
+            <li {%ifequal page page_obj.number%}class="active"{%endifequal%}><a href="?page={{page}}{{getvars}}{{hashtag}}">{{page}}</a></li>
+        {% else %}
+            <li><a href="#">...</a></li>
+        {% endif %}
+    {% endfor %}
+    <li class="next {%if not page_obj.has_next%}disabled{%endif%}">
+       <a href="{%if not page_obj.has_next%}#{%else%}?page={{page_obj.next_page_number}}{{getvars}}{{hashtag}}{%endif%}">下一页</a> 
+    </li>
+</ul>
+</div>
+{% endif %}

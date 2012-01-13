@@ -104,11 +104,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'fujin8.urls'
-
-
 
 TEMPLATE_DIRS = (
     os.path.join(DIRNAME, "templates")
@@ -127,11 +126,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'south',
+    'pagination',
     'fujin8',
     'fujin8.btfactory',
     'fujin8.registration',
 )
 
+PAGINATION_DEFAULT_WINDOW = 3
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.

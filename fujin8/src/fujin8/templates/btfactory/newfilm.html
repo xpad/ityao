@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load pagination_tags %}
+
 {% block title %}最新影片{% endblock %}
 
 {% block extra_js %}
@@ -11,10 +13,6 @@
                 
                 $("img").lazyload({
                     placeholder: "/media/images/grey.gif",
-                    effect: "fadeIn"
-                });
-                
-                $("div.row&nbsp;offset1").lazyload({
                     effect: "fadeIn"
                 });
         });
@@ -35,23 +33,13 @@
 
 {% block content %}
     {%if film_list%}
-            <div class="pagination">
-                <ul>
-                    <li class="pre {%if not film_list.has_previous%}disabled{%endif%}">
-                        <a href="{%if not film_list.has_previous%}#{%else%}?page={{ film_list.previous_page_number }}{%endif%}">前一页</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">{{ film_list.number }}</a>
-                    </li>
-                    <li class="next {%if not film_list.has_next%}disabled{%endif%}">
-                        <a href="{%if not film_list.has_next%}#{%else%}?page={{ film_list.next_page_number}}{%endif%}">下一页</a>
-                    </li>
-                </ul>
-            </div>
+        {% autopaginate film_list 100 %}
+        {% paginate %}
 
-        {% for film in film_list.object_list %}
+        {% for film in film_list%}
             <div class="well">
-                <p class="breadcrumb">{{film.title}}</p>
+                <p class="breadcrumb"><span class="label success">{{film.id}}</span> {{film.title}}</p>
+                {{film.raw_desc|linebreaksbr}}<br />
                 <ul class="media-grid">
                     {% for img in film.getImages %}    
                     <li>
@@ -69,21 +57,7 @@
                 <!--</div>-->
             </div>
         {%endfor%}
-
-            <div class="pagination">
-                <ul>
-                    <li class="pre {%if not film_list.has_previous%}disabled{%endif%}">
-                        <a href="{%if not film_list.has_previous%}#{%else%}?page={{ film_list.previous_page_number }}{%endif%}">前一页</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">{{ film_list.number }}</a>
-                    </li>
-                    <li class="next {%if not film_list.has_next%}disabled{%endif%}">
-                        <a href="{%if not film_list.has_next%}#{%else%}?page={{ film_list.next_page_number}}{%endif%}">下一页</a>
-                    </li>
-                </ul>
-
-            </div>
+        {% paginate %}
     {% else %}
         <div class="row">
             <div class="alert-message warning span10 offset2">

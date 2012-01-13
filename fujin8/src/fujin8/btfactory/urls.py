@@ -10,7 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('fujin8.btfactory.views',
     (r'^$', 'index'),
     (r'^moviethumbcron/$', 'moviethumbcron'),
-    (r'^dailycron/$', 'dailycron'),
+    (r'^dailycron/$', 'dailycron_web'),
     (r'^actresscron/$', 'actresscron'),
     (r'^(?P<daily_id>\d+)/daily/$', 'dailymovie'),
     (r'^movie/(?P<movie_id>\d+)/confirm/$', 'confirmMovie'),    

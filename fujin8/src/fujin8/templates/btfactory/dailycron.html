@@ -4,10 +4,8 @@
 
 {% if daily_lists %}
 {% for dailyinfo in daily_lists %}
-<div class="row">
-    <div class="offset1">
+<div class="breadcrumb">
         <a href="{{ dailyinfo.daily.link }}">{{ dailyinfo.daily.label }}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/btfactory/{{dailyinfo.daily.id}}/daily/">({{dailyinfo.confirmed}}/{{dailyinfo.count}})</a> parsed!
-    </div>
 </div>
 {% endfor %}
 {% else %}
