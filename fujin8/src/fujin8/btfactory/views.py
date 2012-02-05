@@ -297,7 +297,7 @@ def actresscron(request):
     
     return render_to_response('btfactory/actresscount.html', locals())
 
-def newfilm(request):
+def film_list(request):
     '''
     movielist = MovieLink.objects.order_by('-id')
     paginator = Paginator(movielist, 90)
@@ -313,10 +313,10 @@ def newfilm(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         result = paginator.page(paginator.num_pages)    
-    return render_to_response(u'btfactory/newfilm.html',{'film_list':result}, context_instance=RequestContext(request))
+    return render_to_response(u'btfactory/film_list.html',{'film_list':result}, context_instance=RequestContext(request))
     '''
     film_list = MovieLink.objects.order_by('-id')
-    return render_to_response('btfactory/newfilm.html', locals(),  context_instance=RequestContext(request))
+    return render_to_response('btfactory/film_list.html', locals(),  context_instance=RequestContext(request))
      
 def daily(request):        
     parsed_daily_list = DailyLink.objects.order_by('-id')[:100]    

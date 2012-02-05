@@ -17,6 +17,6 @@ urlpatterns = patterns('fujin8.btfactory.views',
     (r'^actress/$', 'actress'),
     (r'^actress/(?P<actress_id>\d+)/$', 'actressinfo'),
     url(r'^daily/$', 'daily', name='daily_film_auth'),
-    url(r'^new/$', 'newfilm', name='new_film'),
+    url(r'^movielink/$', 'film_list', name='film_list'),
 )
 

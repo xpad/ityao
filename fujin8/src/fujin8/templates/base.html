@@ -124,7 +124,7 @@
           <a class="brand" href="#">宅男吧</a>
           <ul class="nav">
             <li class="{% active request.path "^/$" %}"><a href="/">首页</a></li>
-            <li><a href="/btfactory/new/">新片</a></li>
+            <li><a href="/btfactory/movielink/">新片</a></li>
             {% if user.is_authenticated %}
             <li>
                 <a href="index.html" id="nav_home" accesskey="h">{{ user.username }}的订阅</a>

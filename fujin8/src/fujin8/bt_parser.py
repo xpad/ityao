@@ -5,6 +5,7 @@ from sgmllib import SGMLParser
 import re
 import chardet
 
+
 class MonthlyCollectionParser(SGMLParser):
 
     def __init__(self):
@@ -125,7 +126,7 @@ class DailyCollectionParser(SGMLParser):
         data = data.strip()
         if data and self.is_div:
             #if (u'點此下載' not in data.decode('utf-8')) and ('種子鏈接' not in data) and ('下載地址' not in data) and (not re.search('http:', data)):
-            pattern_chinese = ur'點此下載|種子鏈接|下載地址|精彩回看|离线下载很给力'
+            pattern_chinese = ur'點此下載|種子鏈接|下載地址|精彩回看|离线下载很给力|请点备用连接'
             pattern_nochinese = r'^-*$|^\w+$|^$|http:|\[/url\]$'
             if not re.search(pattern_chinese, data) and not re.search(pattern_nochinese, data):
                 self.movie.desc.append(data)
